@@ -3,6 +3,7 @@ package ui;
 import io.DataPrinter;
 import io.DataReader;
 import manager.ProductManager;
+import util.Constants;
 
 public class UserInteface {
     private final ProductManager manager = new ProductManager();
@@ -22,7 +23,8 @@ public class UserInteface {
         }
     }
 
-    private boolean chooseOption(boolean running) throws IllegalArgumentException {
+    private boolean chooseOption(boolean running) {
+        DataPrinter.print("Wybierz co chcesz zrobić");
         MenuOption option = MenuOption.getOptionFromInt(DataReader.getIntFromUser());
 
         switch(option) {
@@ -31,7 +33,7 @@ public class UserInteface {
             case REMOVE_FROM_CART -> manager.removeProduct();
             case PLACE_AN_ORDER -> DataPrinter.print("Funkcjonalnosc wkrotce");
             case EXIT -> running = false;
-            default -> throw new IllegalArgumentException("Wybrano niepoprawną opcję");
+            default -> throw new IllegalArgumentException(Constants.INVALID_OPTION_MESS);
         }
         return running;
     }

@@ -1,5 +1,6 @@
 package io;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DataReader {
@@ -10,8 +11,16 @@ public class DataReader {
     }
 
     public static int getIntFromUser() {
-        int value = scanner.nextInt();
-        scanner.nextLine();
-        return value;
+        while (true) {
+            try {
+                int value = scanner.nextInt();
+                scanner.nextLine();
+                return value;
+            } catch (InputMismatchException e) {
+                DataPrinter.print("Musi zostać podana liczba");
+                scanner.nextLine();
+            }
+        }
+
     }
 }
